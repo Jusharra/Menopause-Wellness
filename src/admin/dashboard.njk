@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+title: Admin dashboard
+permalink: /admin/dashboard/
+admin: true
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{#- Access to this page is enforced server-side by netlify/edge-functions/admin-guard.js. #}
+<section class="admin-shell admin-wide">
+  <div class="admin-bar">
+    <h1>Offers</h1>
+    <form method="POST" action="/.netlify/functions/logout">
+      <button class="btn btn-ghost btn-small" type="submit">Sign out</button>
+    </form>
+  </div>
+
+  <div class="admin-grid">
+    <div class="admin-card">
+      <h2>Add a new offer</h2>
+      <form id="add-offer-form" class="admin-form" novalidate>
+        <label><span>Title <span aria-hidden="true">*</span></span>
+          <input name="title" required maxlength="200">
+        </label>
+        <label>Blurb
+          <textarea name="blurb" rows="4" maxlength="2000"></textarea>
+        </label>
+        <label><span>Affiliate URL <span aria-hidden="true">*</span></span>
+          <input name="affiliateUrl" type="url" required placeholder="https://">
+        </label>
+        <label>Image URL
+          <input name="imageUrl" type="url" placeholder="https://">
+        </label>
+
+        <fieldset>
+          <legend>Symptom Tag</legend>
+          {% if offerSchema.symptomTags.length %}
+          <div class="checks">
+            {% for tag in offerSchema.symptomTags %}
+            <label class="check"><input type="checkbox" name="symptomTags" value="{{ tag }}"> {{ tag }}</label>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p class="muted">No tags found. Add choices to the "Symptom Tag" field in Airtable.</p>
+          {% endif %}
+        </fieldset>
+
+        <div class="form-row">
+          <label>Badge
+            <select name="badge">
+              <option value="">None</option>
+              {% for badge in offerSchema.badges %}<option>{{ badge }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>Status
+            <select name="status">
+              {% for status in offerSchema.statuses %}<option{% if status == "Draft" %} selected{% endif %}>{{ status }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>Order
+            <input name="order" type="number" step="1" inputmode="numeric">
+          </label>
+        </div>
+
+        <button class="btn btn-block" type="submit">Add offer</button>
+        <p id="form-status" class="admin-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-bar">
+        <h2>Existing offers</h2>
+        <button id="refresh-offers" class="btn btn-ghost btn-small" type="button">Refresh</button>
+      </div>
+      <p id="list-status" class="admin-msg" role="status" aria-live="polite">Loading…</p>
+      <ul id="offer-list" class="offer-list"></ul>
+    </div>
+  </div>
+</section>
+<script src="/assets/admin.js" defer></script>

@@ -1,0 +1,24 @@
+{#- Expects `gridOffers` (array of offers). #}
+<p class="affiliate-note">We may earn a commission when you buy through these links. <a href="/disclosure/">How we make money</a>.</p>
+{% if gridOffers.length %}
+<div class="grid">
+  {% for offer in gridOffers %}
+  <article class="card">
+    <div class="card-media">
+      {% if offer.imageUrl %}
+      {% set srcset = offer.imageUrl | imgSrcset %}
+      <img src="{{ offer.imageUrl | imgSrc(640) }}"{% if srcset %} srcset="{{ srcset }}" sizes="(min-width: 980px) 340px, (min-width: 620px) 46vw, 92vw"{% endif %} alt="" width="640" height="480" loading="lazy" decoding="async">
+      {% endif %}
+      {% if offer.badge %}<span class="badge">{{ offer.badge }}</span>{% endif %}
+    </div>
+    <div class="card-body">
+      <h3>{{ offer.title }}</h3>
+      <div class="card-text">{{ offer.blurb | paragraphs | safe }}</div>
+      <a class="btn btn-block" href="{{ offer.affiliateUrl }}" target="_blank" rel="nofollow sponsored noopener">Get Offer<span class="sr-only">: {{ offer.title }} (opens in a new tab)</span></a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty">New recommendations are on the way. Check back soon.</p>
+{% endif %}

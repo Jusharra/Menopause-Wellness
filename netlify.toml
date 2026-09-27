@@ -1,0 +1,42 @@
+[build]
+  command = "npm run build"
+  publish = "_site"
+  functions = "netlify/functions"
+  edge_functions = "netlify/edge-functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Netlify Image CDN: lets offer images (hosted anywhere) be resized and served as AVIF/WebP.
+# Tighten this list to the image hosts you actually use, e.g. ["https://m\\.media-amazon\\.com/.*"].
+[images]
+  remote_images = ["https://.*"]
+
+# Local development with `netlify dev` (runs Eleventy + functions + edge functions together).
+[dev]
+  framework = "#custom"
+  command = "npm run dev"
+  targetPort = 8080
+  port = 8888
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

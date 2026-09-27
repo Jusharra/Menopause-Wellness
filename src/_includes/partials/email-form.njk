@@ -1,0 +1,24 @@
+{#-
+  Netlify Forms email capture. Netlify detects this form in the built HTML because of
+  data-netlify="true"; the hidden form-name input tells Netlify which form a POST belongs to.
+  Optional context: `symptom` (on symptom pages) fills symptom_interest.
+#}
+<section class="capture" id="newsletter" aria-labelledby="capture-title">
+  <div class="wrap narrow">
+    {# TODO: replace placeholder lead-magnet copy #}
+    <h2 id="capture-title">Get our free midlife wellness guide</h2>
+    <p>[Placeholder] A short, practical guide to feeling more like yourself, plus the occasional email with new finds. No spam, ever.</p>
+    <form class="capture-form" name="email-capture" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="email-capture">
+      <input type="hidden" name="source_page" value="{{ page.url }}">
+      <input type="hidden" name="symptom_interest" value="{{ symptom.name if symptom else '' }}">
+      <p class="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="sr-only" for="capture-email">Email address</label>
+      <div class="capture-row">
+        <input id="capture-email" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@example.com">
+        <button class="btn" type="submit">Send me the guide</button>
+      </div>
+      <p class="fine">Unsubscribe anytime. By signing up you agree to receive emails from {{ site.name }}.</p>
+    </form>
+  </div>
+</section>

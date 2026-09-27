@@ -1,0 +1,24 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>About {{ site.name }}</h2>
+        {# TODO: replace placeholder About copy #}
+        <p>[About placeholder] A short introduction to who runs this site and why: written by and for women navigating midlife.</p>
+      </div>
+      <div>
+        <h2>More</h2>
+        <ul class="footer-links">
+          <li><a href="/disclosure/">Affiliate disclosure</a></li>
+          <li><a href="mailto:{{ site.contactEmail }}">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <p><strong>Affiliate disclosure:</strong> Some links on this site are affiliate links. If you click one and make a purchase, we may earn a commission at no extra cost to you. This never changes the price you pay. <a href="/disclosure/">Read our full disclosure</a>.</p>
+      <p><strong>Not medical advice:</strong> Content on this site is for general information only and is not a substitute for professional medical advice, diagnosis or treatment. Always talk to your doctor before starting a new supplement or treatment.</p>
+      <p>&copy; {{ site.year }} {{ site.name }}</p>
+    </div>
+  </div>
+</footer>

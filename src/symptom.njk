@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+hasCapture: true
+pagination:
+  data: symptoms
+  size: 1
+  alias: symptom
+  addAllPagesToCollections: true
+permalink: "/symptoms/{{ symptom.slug }}/"
+eleventyComputed:
+  # `| safe` here because the layout escapes these when it outputs them.
+  title: "{{ symptom.name | safe }}"
+  description: "Practical support and hand-picked products for {{ symptom.name | lower | safe }} during perimenopause and menopause."
+---
+<section class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/#symptoms">Symptoms</a></nav>
+    <h1>{{ symptom.name }}</h1>
+    <div class="prose lede">{{ symptom.intro | paragraphs | safe }}</div>
+  </div>
+</section>
+
+<section class="section section-tight" aria-labelledby="symptom-offers-title">
+  <div class="wrap">
+    <h2 id="symptom-offers-title">What may help</h2>
+    {% set gridOffers = offers | offersForTags(symptom.relatedTags) %}
+    {% include "partials/offer-grid.njk" %}
+    <p class="medical-note">This is general information, not medical advice. Check with your doctor before trying a new supplement or treatment.</p>
+  </div>
+</section>
+
+{% include "partials/email-form.njk" %}

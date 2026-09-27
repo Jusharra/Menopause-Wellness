@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {% endif %}{{ site.name }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  {% if noindex %}
+  <meta name="robots" content="noindex, nofollow">
+  {% else %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ title or site.name }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  {% endif %}
+  <meta name="theme-color" content="#FBF8F4">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  {#- CSS is inlined: no render-blocking stylesheet request. #}
+  <style>{% include "css/site.css" %}{% if admin %}{% include "css/admin.css" %}{% endif %}</style>
+</head>
+<body{% if admin %} class="admin"{% endif %}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">{{ site.name }}</a>
+      {% if not admin %}
+      <nav class="site-nav" aria-label="Main">
+        <a href="/#symptoms">Symptoms</a>
+        <a href="/#offers">Our picks</a>
+        <a href="{{ '#newsletter' if hasCapture else '/#newsletter' }}">Free guide</a>
+      </nav>
+      {% endif %}
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  {% if not admin %}{% include "partials/footer.njk" %}{% endif %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: Admin sign in
+permalink: /admin/
+admin: true
+noindex: true
+eleventyExcludeFromCollections: true
+---
+<section class="admin-shell">
+  <div class="admin-card admin-login">
+    <h1>Admin sign in</h1>
+    <p id="login-error" class="admin-msg" data-kind="error" role="alert" hidden>That password didn't match. Please try again.</p>
+    <form method="POST" action="/.netlify/functions/login">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required autofocus>
+      <button class="btn btn-block" type="submit">Sign in</button>
+    </form>
+  </div>
+</section>
+<script>
+  if (new URLSearchParams(location.search).has("error")) document.getElementById("login-error").hidden = false;
+</script>
