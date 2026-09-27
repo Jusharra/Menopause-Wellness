@@ -25,12 +25,12 @@
 .admin-msg { margin: 0; font-size: 0.9375rem; }
 .admin-msg:empty { display: none; }
 .admin-msg[data-kind="error"] { color: #a3342a; }
-.admin-msg[data-kind="success"] { color: var(--sage); }
+.admin-msg[data-kind="success"] { color: var(--mauve); }
 .offer-list { list-style: none; margin: 0; padding: 0; }
 .offer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); }
 .offer-info { flex: 1 1 220px; min-width: 0; }
 .offer-info strong { display: block; overflow-wrap: anywhere; }
 .offer-meta { font-size: 0.8125rem; color: var(--muted); }
 .offer-actions { display: flex; gap: 0.5rem; }
-.pill { display: inline-block; padding: 0.1rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: var(--sand); color: var(--muted); }
-.pill-published { background: var(--sage-soft); color: var(--sage); }
+.pill { display: inline-block; padding: 0.1rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: var(--champagne); color: var(--muted); }
+.pill-published { background: var(--blush); color: var(--mauve); }
