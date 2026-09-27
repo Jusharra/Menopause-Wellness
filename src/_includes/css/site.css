@@ -88,7 +88,7 @@ a:hover { color: var(--accent); }
     radial-gradient(120% 80% at 100% 0%, var(--sage-soft) 0%, transparent 60%),
     radial-gradient(90% 70% at 0% 100%, var(--sand) 0%, transparent 60%);
 }
-.hero h1 { max-width: 15ch; }
+.hero h1 { max-width: 20ch; }
 .hero .lede { max-width: 52ch; margin-bottom: 1.75rem; }
 @media (min-width: 800px) { .hero { padding: 6rem 0 5.5rem; } }
 

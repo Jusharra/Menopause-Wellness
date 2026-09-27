@@ -1,9 +1,9 @@
-// Site-wide settings. Placeholder values: edit before launch.
+// Site-wide settings.
 export default {
-  name: "Menopause Wellness",
+  name: "MenoWellness",
   description:
-    "Calm, plain-language guidance and carefully chosen products for women navigating perimenopause and menopause.",
+    "Straightforward guidance and thoughtfully chosen products for women navigating perimenopause and menopause.",
   url: (process.env.URL || "http://localhost:8080").replace(/\/$/, ""),
-  contactEmail: "hello@example.com",
+  contactEmail: "sistacoinx@gmail.com",
   year: new Date().getFullYear(),
 };
